@@ -1,4 +1,3 @@
-from tokenize import String
 import configs
 
 
@@ -20,6 +19,13 @@ def encodeNatrual(i: int, j: int) -> int:
 def log(string: str) -> None:
     if configs.LOG:
         print(string)
+
+
+def powString(base: int, exponent: int) -> str:
+    if configs.USE_SUPERSCRIPTS:
+        return f"{base}{getIntSuperScript(exponent)}"
+
+    return f"{base}**{exponent}"
 
 
 # Get superscript for a number

@@ -1,6 +1,7 @@
 
 import string
-from utils import encodeNatrual, encodeWhole, log, getIntSuperScript, getIntSubScript
+from utils import encodeNatrual, encodeWhole, log, getIntSuperScript, getIntSubScript, powString
+from configs import MULT_SYMBOL
 from abc import abstractmethod
 
 
@@ -20,7 +21,7 @@ class AddI(Instruction):
         result = encodeNatrual(2 * self.register, self.label)
         log(f"Encoding {self}:")
         log(f"    Encoding <<{self.register}, {self.label}>>:")
-        log(f"    = 2{getIntSuperScript(self.register)} x (2 x {self.label} + 1)")
+        log(f"    = {powString(2, self.register)} {MULT_SYMBOL} (2 {MULT_SYMBOL} {self.label} + 1)")
         log(f"    = {result}")
         log(f"= {result}")
         return result
@@ -42,10 +43,10 @@ class SubI(Instruction):
 
         log(f"Encoding {self}:")
         log(f"    Encoding <{self.trueLabel}, {self.falseLabel}>:")
-        log(f"    = 2{getIntSuperScript(self.trueLabel)} x (2 x {self.falseLabel} + 1) - 1")
+        log(f"    = {powString(2, self.trueLabel)} {MULT_SYMBOL} (2 {MULT_SYMBOL} {self.falseLabel} + 1) - 1")
         log(f"    = {elpair}")
         log(f"    Encoding <<{self.register}, {elpair}>>")
-        log(f"    = 2{getIntSuperScript(self.register)} x (2 x {elpair} + 1)")
+        log(f"    = {powString(2, self.register)} {MULT_SYMBOL} (2 {MULT_SYMBOL} {elpair} + 1)")
         log(f"    = {encoded}")
         log(f"= {encoded}")
         return encoded

@@ -1,7 +1,7 @@
 from typing import List
 from instruction import Instruction, AddI, SubI, HaltI
-from utils import encodeNatrual, getIntSubScript, getIntSuperScript
-from utils import log
+from utils import log, encodeNatrual, getIntSubScript, getIntSuperScript, powString
+from configs import MULT_SYMBOL
 
 
 # Encodes a list of instructions into int
@@ -14,7 +14,7 @@ def encodeList(encodedInstructions: List[int]) -> int:
     curr = 0
     for n in reversed(encodedInstructions):
         total = encodeNatrual(n, curr)
-        log(f"encoding <<{n}, {curr}>> = {total}")
+        # log(f"encoding <<{n}, {curr}>> = {total}")
         curr = total
     return total
 
@@ -23,23 +23,5 @@ def encodeList(encodedInstructions: List[int]) -> int:
 def encodeListPowerForm(encodedInstructions: List[int]) -> str:
     curr = "1"
     for n in reversed(encodedInstructions):
-        curr = f"2{getIntSuperScript(n)} x ({curr})"
+        curr = f"{powString(2, n)} {MULT_SYMBOL} ({curr})"
     return curr
-
-
-encodeInput = [SubI(1, 1, 2),
-               AddI(0, 0),
-               SubI(2, 3, 4),
-               AddI(0, 2),
-               HaltI()]
-
-
-def encode():
-
-    arr = encodeInstructionMap(encodeInput)
-    print(arr)
-    # print(encodeList(arr))
-    print(encodeListPowerForm(arr))
-
-
-# encode()
