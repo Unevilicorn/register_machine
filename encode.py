@@ -1,6 +1,6 @@
 from typing import List
-from instruction import Instruction, AddI, SubI, HaltI
-from utils import log, encodeNatrual, getIntSubScript, getIntSuperScript, powString
+from instruction import Instruction
+from utils import encodeNatrual, powString
 from configs import MULT_SYMBOL
 
 
@@ -23,5 +23,5 @@ def encodeList(encodedInstructions: List[int]) -> int:
 def encodeListPowerForm(encodedInstructions: List[int]) -> str:
     curr = "1"
     for n in reversed(encodedInstructions):
-        curr = f"{powString(2, n)} {MULT_SYMBOL} ({curr})"
+        curr = f"{powString(2, n)} {MULT_SYMBOL} (2 {MULT_SYMBOL} {curr} + 1)"
     return curr

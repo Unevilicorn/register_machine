@@ -11,8 +11,8 @@ def decodeToIntList(encoded: int) -> List[int]:
     c = encoded
     out = []
     while c != 0:
+        log(f"Decoding list {c}")  #
         (p, c) = decodeNatrual(c)
-        log(f"Decoding list ")  # {powString(2, p)} {MULT_SYMBOL} {c}
         log(f"= <<{p}, {c}>>")
         out.append(p)
     return out

@@ -1,6 +1,6 @@
 
 import string
-from utils import encodeNatrual, encodeWhole, log, getIntSuperScript, getIntSubScript, powString
+from utils import encodeNatrual, encodeWhole, log, getIntSubScript, powString
 from configs import MULT_SYMBOL
 from abc import abstractmethod
 

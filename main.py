@@ -1,6 +1,5 @@
-from typing import List
 from decode import decodeAll
-from instruction import Instruction, AddI, SubI, HaltI
+from instruction import AddI, SubI, HaltI
 from encode import encodeInstructionMap, encodeList, encodeListPowerForm
 from decode import decodeToIntList, decodeAll
 
@@ -31,8 +30,14 @@ def decode(n):
 
 
 # encode(encodeInput)
-decode(decodeInput)
+# decode(decodeInput)
 
 # decode(encode(encodeInput))
 
-print(encodeListPowerForm([1, 2, 3, 4]))
+# print(encodeList([3]))       # 8
+# print(encodeList([1, 3]))    # 34
+# print(encodeList([2, 1, 3])) # 276
+
+# print(decodeToIntList(8))   # [3]
+# print(decodeToIntList(34))  # [1, 3]
+# print(decodeToIntList(276))  # [2, 1 ,3]
