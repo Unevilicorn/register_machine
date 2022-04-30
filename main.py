@@ -1,13 +1,37 @@
-from decode import decodeAll
-from instruction import AddI, SubI, HaltI
-from encode import encodeInstructionMap, encodeList, encodeListPowerForm
 from decode import decodeToIntList, decodeAll
+from encode import encodeInstructionMap, encodeList, encodeListPowerForm
+from instruction import AddI, SubI, HaltI
+from state import State
+from program import Program
 
 encodeInput = [SubI(1, 1, 2),
                AddI(0, 0),
                SubI(2, 3, 4),
                AddI(0, 2),
                HaltI()]
+
+# encodeInput = [SubI(1, 1, 6),
+#                SubI(2, 2, 4),
+#                AddI(0, 3),
+#                AddI(3, 1),
+#                SubI(3, 5, 0),
+#                AddI(2, 4),
+#                HaltI()
+#                ]
+
+# encode(encodeInput)
+# decode(decodeInput)
+
+# decode(encode(encodeInput))
+
+# print(encodeList([3]))       # 8
+# print(encodeList([1, 3]))    # 34
+# print(encodeList([2, 1, 3])) # 276
+
+# print(decodeToIntList(8))   # [3]
+# print(decodeToIntList(34))  # [1, 3]
+# print(decodeToIntList(276))  # [2, 1 ,3]
+
 
 decodeInput = 2**216*833  # 786432
 
@@ -29,15 +53,9 @@ def decode(n):
     return dfarr
 
 
-# encode(encodeInput)
-# decode(decodeInput)
+def runProgram(state, instructions):
+    program = Program(state, instructions)
+    program.execute(10)
 
-# decode(encode(encodeInput))
 
-# print(encodeList([3]))       # 8
-# print(encodeList([1, 3]))    # 34
-# print(encodeList([2, 1, 3])) # 276
-
-# print(decodeToIntList(8))   # [3]
-# print(decodeToIntList(34))  # [1, 3]
-# print(decodeToIntList(276))  # [2, 1 ,3]
+runProgram(State(0, [0, 1, 2]), encodeInput)

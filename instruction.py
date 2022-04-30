@@ -1,13 +1,18 @@
 
 import string
-from utils import encodeNatrual, encodeWhole, log, getIntSubScript, powString
-from configs import MULT_SYMBOL
 from abc import abstractmethod
+from configs import MULT_SYMBOL
+from utils import encodeNatrual, encodeWhole, log, getIntSubScript, powString
+from state import State
 
 
 class Instruction:
     @abstractmethod
     def encode(self) -> int:
+        raise NotImplementedError
+
+    @abstractmethod
+    def execute(self, state: State) -> None:
         raise NotImplementedError
 
 
@@ -25,6 +30,10 @@ class AddI(Instruction):
         log(f"    = {result}")
         log(f"= {result}")
         return result
+
+    def execute(self, state: State) -> None:
+        state.registers[self.register] += 1
+        state.jumpTo(self.label)
 
     def __str__(self) -> string:
         return f"R{getIntSubScript(self.register)}+ -> L{getIntSubScript(self.label)}"
@@ -51,6 +60,13 @@ class SubI(Instruction):
         log(f"= {encoded}")
         return encoded
 
+    def execute(self, state: State) -> None:
+        if state.registers[self.register] > 0:
+            state.registers[self.register] -= 1
+            state.jumpTo(self.trueLabel)
+        else:
+            state.jumpTo(self.falseLabel)
+
     def __str__(self) -> str:
         return f"R{getIntSubScript(self.register)}- -> L{getIntSubScript(self.trueLabel)}, L{getIntSubScript(self.falseLabel)}"
 
@@ -61,6 +77,9 @@ class HaltI(Instruction):
         log(f"Encoding {self}:")
         log(f"= 0")
         return 0
+
+    def execute(self, state: State) -> None:
+        return state.halt()
 
     def __str__(self) -> str:
         return f"HALT"
