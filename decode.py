@@ -31,10 +31,15 @@ def decodeInstruction(encoded: int) -> Instruction:
         if p % 2 == 0:
             # Is add instruction
             res = AddI(p // 2, c)
+            log(f"  = 2 ** (2 {MULT_SYMBOL} {p // 2}) {MULT_SYMBOL} {c}")
+            log(f"  = <<2 * {p // 2} , {c} >>")
         else:
             # Is Sub instruction
             (t, f) = decodeWhole(c)
             res = SubI((p - 1) // 2, t, f)
+            log(f"  = 2 ** (2 {MULT_SYMBOL} {(p - 1) // 2}) {MULT_SYMBOL} {c}")
+            log(f"  = 2 ** (2 {MULT_SYMBOL} {(p - 1) // 2}) {MULT_SYMBOL} (2 ** (2 ** {t} * {f}) - 1)")
+            log(f"  = <<2 {MULT_SYMBOL} {(p - 1) // 2} + 1, <{t}, {f}> >>")
 
     log(f"= {res}")
     return res

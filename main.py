@@ -1,4 +1,4 @@
-from decode import decodeToIntList, decodeAll
+from decode import decodeInstruction, decodeToIntList, decodeAll
 from encode import encodeInstructionMap, encodeList, encodeListPowerForm
 from instruction import AddI, SubI, HaltI
 from program import Program
@@ -71,4 +71,5 @@ def runProgram(state, instructions):
 # runProgram(State(0, [0, 1, 2]), encodeInput)
 
 # encode(encodeInput)
-print(encodeInstructionMap(encodeInput))
+# print(encodeInstructionMap(encodeInput))
+decodeAll([1144, 448])
