@@ -1,13 +1,14 @@
+from state import State
 from decode import decodeInstruction, decodeToIntList, decodeAll
 from encode import encodeInstructionMap, encodeList, encodeListPowerForm
 from instruction import AddI, SubI, HaltI
 from program import Program
 
-# encodeInput = [SubI(1, 1, 2),
-#                AddI(0, 0),
-#                SubI(2, 3, 4),
-#                AddI(0, 2),
-#                HaltI()]
+encodeInput = [SubI(1, 1, 2),
+               AddI(0, 0),
+               SubI(2, 3, 4),
+               AddI(0, 2),
+               HaltI()]
 
 # encodeInput = [SubI(1, 1, 6),
 #                SubI(2, 2, 4),
@@ -18,14 +19,14 @@ from program import Program
 #                HaltI()
 #                ]
 
-encodeInput = [SubI(0, 1, 4),
-               AddI(1, 2),
-               SubI(0, 3, 4),
-               AddI(2, 0),
-               SubI(1, 4, 5),
-               SubI(2, 6, 7),
-               AddI(0, 5),
-               HaltI()]
+# encodeInput = [SubI(0, 1, 4),
+#                AddI(1, 2),
+#                SubI(0, 3, 4),
+#                AddI(2, 0),
+#                SubI(1, 4, 5),
+#                SubI(2, 6, 7),
+#                AddI(0, 5),
+#                HaltI()]
 
 # encode(encodeInput)
 # decode(decodeInput)
@@ -66,10 +67,10 @@ def runProgram(state, instructions):
     program.execute(10)
 
 
-# nl = '\n'
-# print(f"{nl.join(str(x) for x in encodeInput)}")
-# runProgram(State(0, [0, 1, 2]), encodeInput)
+nl = '\n'
+print(f"{nl.join(str(x) for x in encodeInput)}")
+runProgram(State(0, [0, 1, 2]), encodeInput)
 
 # encode(encodeInput)
 # print(encodeInstructionMap(encodeInput))
-decodeAll([1144, 448])
+# decodeAll([1144, 448])
